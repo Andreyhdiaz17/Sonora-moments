@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sonora Moments – Música en Vivo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8C96A;
+      --dark: #0A0C10;
+      --dark-2: #111520;
+      --dark-3: #1A1F2E;
+      --dark-4: #232A3B;
+      --text: #E8E4DA;
+      --text-muted: #9A968C;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: var(--text);
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      background: linear-gradient(to bottom, rgba(10,12,16,.92) 0%, transparent 100%);
+      backdrop-filter: blur(8px);
+      transition: background .3s;
+    }
+    nav.scrolled { background: rgba(10,12,16,.97); }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      line-height: 1.3;
+    }
+    .nav-logo span { display: block; font-weight: 300; font-size: .85rem; letter-spacing: .28em; color: var(--text-muted); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--text);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--gold-light); }
+
+    .btn-reservar-nav {
+      background: var(--gold);
+      color: var(--dark) !important;
+      padding: 10px 22px;
+      border-radius: 2px;
+      font-weight: 700 !important;
+      font-size: .7rem !important;
+      letter-spacing: .16em !important;
+      transition: background .2s, transform .1s !important;
+    }
+    .btn-reservar-nav:hover { background: var(--gold-light) !important; transform: translateY(-1px); }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 24px; height: 2px; background: var(--text); transition: .3s; }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(105deg, rgba(10,12,16,.82) 40%, rgba(10,12,16,.3) 100%),
+        url('https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=1600&q=80') center/cover no-repeat;
+      transform: scale(1.06);
+      animation: slowZoom 18s ease-out forwards;
+    }
+    @keyframes slowZoom { to { transform: scale(1); } }
+
+    .hero-lights {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 70% 40%, rgba(201,168,76,.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 640px;
+      padding: 0 48px;
+      margin-top: 80px;
+      opacity: 0;
+      animation: fadeUp .9s .4s ease forwards;
+    }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+
+    .hero-eyebrow {
+      font-size: .68rem;
+      font-weight: 500;
+      letter-spacing: .26em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.08;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      margin-bottom: 8px;
+    }
+
+    .hero-title-italic {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--gold-light);
+      letter-spacing: .02em;
+      line-height: 1.15;
+      display: block;
+      margin-bottom: 28px;
+    }
+
+    .hero-sub {
+      font-size: .9rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 400px;
+      margin-bottom: 44px;
+    }
+
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--gold);
+      color: var(--dark);
+      text-decoration: none;
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 16px 30px;
+      border-radius: 2px;
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-primary svg { width: 18px; height: 18px; fill: currentColor; }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1.5px solid rgba(232,228,218,.45);
+      color: var(--text);
+      text-decoration: none;
+      font-size: .74rem;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 16px 30px;
+      border-radius: 2px;
+      transition: border-color .2s, color .2s, transform .15s;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold-light); transform: translateY(-2px); }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: .6rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp .8s 1.2s ease forwards;
+    }
+    .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollPulse 2s 1.6s ease infinite; }
+    @keyframes scrollPulse { 0%,100%{ opacity:.4; } 50%{ opacity:1; } }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 100px 48px; }
+
+    .section-label {
+      font-size: .65rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .divider {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 60px;
+    }
+    .divider::after {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    /* ── SERVICIOS ── */
+    #servicios { background: var(--dark-2); }
+
+    .servicios-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .servicio-card {
+      background: var(--dark-3);
+      border: 1px solid rgba(201,168,76,.15);
+      border-radius: 4px;
+      padding: 36px 24px;
+      text-align: center;
+      transition: border-color .2s, transform .2s;
+      cursor: default;
+    }
+    .servicio-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+
+    .servicio-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+      display: block;
+      color: var(--gold-light);
+    }
+    .servicio-card h3 {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .servicio-card p { font-size: .78rem; font-weight: 300; color: var(--text-muted); line-height: 1.65; }
+
+    /* ── MÚSICOS ── */
+    #musicos { background: var(--dark); }
+
+    .musicos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+      max-width: 1100px;
+      margin: 0 auto 56px;
+    }
+
+    .musico-card {
+      background: var(--dark-3);
+      border: 1px solid rgba(201,168,76,.12);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform .25s, border-color .25s;
+    }
+    .musico-card:hover { transform: translateY(-6px); border-color: var(--gold); }
+
+    .musico-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      filter: brightness(.85) sepia(.18);
+      transition: filter .3s;
+    }
+    .musico-card:hover .musico-img { filter: brightness(.95) sepia(.08); }
+
+    .musico-info { padding: 22px 20px; }
+    .musico-info h3 { font-size: .95rem; font-weight: 600; letter-spacing: .08em; margin-bottom: 6px; }
+    .musico-badge {
+      display: inline-block;
+      font-size: .62rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(201,168,76,.4);
+      padding: 3px 10px;
+      border-radius: 2px;
+      margin-bottom: 10px;
+    }
+    .musico-info p { font-size: .78rem; color: var(--text-muted); line-height: 1.6; }
+
+    .musicos-cta { text-align: center; }
+
+    /* ── NOSOTROS ── */
+    #nosotros {
+      background: var(--dark-2);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 48px;
+    }
+
+    .nosotros-img-wrap { position: relative; }
+    .nosotros-img {
+      width: 100%;
+      border-radius: 4px;
+      filter: brightness(.8) sepia(.2);
+      display: block;
+    }
+    .nosotros-accent {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      width: 60%;
+      aspect-ratio: 1;
+      border: 1px solid rgba(201,168,76,.3);
+      border-radius: 4px;
+      z-index: -1;
+    }
+
+    .nosotros-text .section-label,
+    .nosotros-text .section-title { text-align: left; }
+    .nosotros-text .divider { justify-content: flex-start; }
+
+    .nosotros-text p {
+      font-size: .87rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.85;
+      margin-bottom: 16px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 36px;
+      padding-top: 36px;
+      border-top: 1px solid rgba(201,168,76,.2);
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.6rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      line-height: 1;
+      display: block;
+    }
+    .stat-label { font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: var(--text-muted); margin-top: 4px; }
+
+    /* ── CONTACTO ── */
+    #contacto { background: var(--dark); max-width: 680px; margin: 0 auto; }
+    #contacto .section-title, #contacto .section-label { text-align: center; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .form-field { display: flex; flex-direction: column; gap: 6px; }
+    .form-field label { font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      background: var(--dark-3);
+      border: 1px solid rgba(201,168,76,.2);
+      color: var(--text);
+      font-family: 'Montserrat', sans-serif;
+      font-size: .84rem;
+      padding: 13px 16px;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus { border-color: var(--gold); }
+    .form-field select option { background: var(--dark-3); }
+    .form-field textarea { resize: vertical; min-height: 110px; }
+
+    .btn-submit {
+      align-self: stretch;
+      background: var(--gold);
+      color: var(--dark);
+      border: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      padding: 18px;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+      margin-top: 6px;
+    }
+    .btn-submit:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    .whatsapp-alt {
+      text-align: center;
+      margin-top: 20px;
+      font-size: .8rem;
+      color: var(--text-muted);
+    }
+    .whatsapp-alt a {
+      color: var(--gold-light);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color .2s;
+    }
+    .whatsapp-alt a:hover { color: var(--gold); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark-2);
+      border-top: 1px solid rgba(201,168,76,.15);
+      padding: 48px 48px 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 40px;
+    }
+
+    .footer-brand .nav-logo { font-size: 1.2rem; margin-bottom: 14px; }
+    .footer-brand p { font-size: .78rem; color: var(--text-muted); line-height: 1.7; max-width: 280px; }
+
+    .footer-col h4 { font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a { text-decoration: none; color: var(--text-muted); font-size: .8rem; transition: color .2s; }
+    .footer-col ul a:hover { color: var(--gold-light); }
+
+    .footer-bottom {
+      grid-column: 1/-1;
+      border-top: 1px solid rgba(201,168,76,.1);
+      padding-top: 24px;
+      text-align: center;
+      font-size: .7rem;
+      color: var(--text-muted);
+      letter-spacing: .08em;
+    }
+
+    /* ── FLOATING WA ── */
+    .wa-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 999;
+      width: 54px; height: 54px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,.4);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,.55); }
+    .wa-float svg { width: 28px; height: 28px; fill: white; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 60px; left: 0; right: 0; background: rgba(10,12,16,.98); padding: 24px; gap: 20px; }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+      .hero-content { padding: 0 24px; }
+      section { padding: 72px 24px; }
+      #nosotros { grid-template-columns: 1fr; gap: 40px; padding: 72px 24px; }
+      .nosotros-accent { display: none; }
+      footer { grid-template-columns: 1fr; gap: 32px; padding: 40px 24px 24px; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-logo">
+    SONORA
+    <span>MOMENTS</span>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#hero">Inicio</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#musicos">Músicos</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="https://wa.me/TUNUMERO?text=Hola,%20quiero%20reservar%20música%20en%20vivo" class="btn-reservar-nav">Reservar Ahora</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-lights"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">✦ Música en Vivo</p>
+    <h1 class="hero-title">
+      Música en Vivo<br>
+      Para Momentos
+    </h1>
+    <em class="hero-title-italic">inolvidables</em>
+    <p class="hero-sub">
+      Hacemos que cada nota cree emociones y cada momento
+      se convierta en un recuerdo para toda la vida.
+    </p>
+    <div class="hero-btns">
+      <a href="https://wa.me/TUNUMERO?text=Hola,%20quiero%20reservar%20música%20en%20vivo%20para%20mi%20evento" class="btn-primary" target="_blank">
+        <!-- WhatsApp icon -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.556 4.111 1.528 5.838L0 24l6.335-1.512A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.848 0-3.584-.493-5.083-1.355l-.361-.214-3.762.897.952-3.668-.235-.376A9.945 9.945 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Reservar por WhatsApp
+      </a>
+      <a href="#musicos" class="btn-outline">Ver Músicos</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <p class="section-label reveal">Nuestros Servicios</p>
+  <h2 class="section-title reveal">Música Para Cada Ocasión</h2>
+  <div class="divider reveal"></div>
+  <div class="servicios-grid">
+    <div class="servicio-card reveal">
+      <span class="servicio-icon">💍</span>
+      <h3>Matrimonios</h3>
+      <p>Música elegante para el día más importante de tu vida.</p>
+    </div>
+    <div class="servicio-card reveal">
+      <span class="servicio-icon">⛪</span>
+      <h3>Misas y Ceremonias</h3>
+      <p>Acompañamiento musical para ceremonias religiosas.</p>
+    </div>
+    <div class="servicio-card reveal">
+      <span class="servicio-icon">👶</span>
+      <h3>Bautizos</h3>
+      <p>Un ambiente tierno y especial para este momento único.</p>
+    </div>
+    <div class="servicio-card reveal">
+      <span class="servicio-icon">🎵</span>
+      <h3>Serenatas</h3>
+      <p>Sorprende a esa persona especial con una serenata inolvidable.</p>
+    </div>
+    <div class="servicio-card reveal">
+      <span class="servicio-icon">✨</span>
+      <h3>Flashmobs</h3>
+      <p>Experiencias sorpresa que crean recuerdos para siempre.</p>
+    </div>
+    <div class="servicio-card reveal">
+      <span class="servicio-icon">🥂</span>
+      <h3>Eventos Corporativos</h3>
+      <p>Amenización musical de alto nivel para tus eventos de empresa.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MÚSICOS -->
+<section id="musicos">
+  <p class="section-label reveal">Talento de Primera</p>
+  <h2 class="section-title reveal">Músicos Destacados</h2>
+  <div class="divider reveal"></div>
+  <div class="musicos-grid">
+    <div class="musico-card reveal">
+      <img class="musico-img" src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&q=70" alt="Cuarteto de Cuerdas" loading="lazy" />
+      <div class="musico-info">
+        <h3>Cuarteto Sonora</h3>
+        <span class="musico-badge">Cuerdas & Clásica</span>
+        <p>Elegancia y emoción en cada interpretación. Ideal para ceremonias y cócteles.</p>
+      </div>
+    </div>
+    <div class="musico-card reveal">
+      <img class="musico-img" src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=70" alt="Voz & Piano" loading="lazy" />
+      <div class="musico-info">
+        <h3>Dúo Voz & Piano</h3>
+        <span class="musico-badge">Pop & Soul</span>
+        <p>Repertorio versátil que va del romántico al pop actual. Perfecto para recepciones.</p>
+      </div>
+    </div>
+    <div class="musico-card reveal">
+      <img class="musico-img" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&q=70" alt="Mariachi & Folclor" loading="lazy" />
+      <div class="musico-info">
+        <h3>Ensamble Folklórico</h3>
+        <span class="musico-badge">Folclor & Mariachi</span>
+        <p>Tradición y alegría para serenatas, fiestas y eventos culturales.</p>
+      </div>
+    </div>
+  </div>
+  <div class="musicos-cta reveal">
+    <a href="https://wa.me/TUNUMERO?text=Quiero%20saber%20más%20sobre%20los%20músicos%20disponibles" class="btn-primary" target="_blank">
+      Consultar Disponibilidad
+    </a>
+  </div>
+</section>
+
+<!-- NOSOTROS -->
+<section id="nosotros">
+  <div class="nosotros-img-wrap reveal">
+    <img class="nosotros-img" src="https://images.unsplash.com/photo-1465821185615-20b3c2fbf41b?w=800&q=70" alt="Nosotros" loading="lazy" />
+    <div class="nosotros-accent"></div>
+  </div>
+  <div class="nosotros-text">
+    <p class="section-label">Quiénes Somos</p>
+    <h2 class="section-title">Pasión por la Música, Amor por los Momentos</h2>
+    <div class="divider"></div>
+    <p>Somos un equipo de músicos profesionales con años de experiencia en eventos sociales y corporativos. Nuestra misión es hacer que cada nota cuente y cada momento se vuelva eterno.</p>
+    <p>Entendemos que cada evento es único, por eso ofrecemos propuestas personalizadas, repertorios a medida y una atención cercana desde el primer contacto hasta el final del evento.</p>
+    <div class="stats">
+      <div>
+        <span class="stat-num">+500</span>
+        <span class="stat-label">Eventos</span>
+      </div>
+      <div>
+        <span class="stat-num">+8</span>
+        <span class="stat-label">Años</span>
+      </div>
+      <div>
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Satisfacción</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <p class="section-label reveal">Contáctanos</p>
+  <h2 class="section-title reveal">Cotiza Tu Evento</h2>
+  <div class="divider reveal"></div>
+  <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+    <div class="form-row">
+      <div class="form-field">
+        <label>Nombre</label>
+        <input type="text" id="nombre" placeholder="Tu nombre" required />
+      </div>
+      <div class="form-field">
+        <label>Teléfono</label>
+        <input type="tel" id="telefono" placeholder="+52 000 000 0000" required />
+      </div>
+    </div>
+    <div class="form-field">
+      <label>Tipo de Evento</label>
+      <select id="evento" required>
+        <option value="" disabled selected>Selecciona un servicio</option>
+        <option>Matrimonio</option>
+        <option>Misa o Ceremonia</option>
+        <option>Bautizo</option>
+        <option>Serenata</option>
+        <option>Flashmob</option>
+        <option>Evento Corporativo</option>
+        <option>Otro</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <div class="form-field">
+        <label>Fecha del Evento</label>
+        <input type="date" id="fecha" required />
+      </div>
+      <div class="form-field">
+        <label>Ciudad</label>
+        <input type="text" id="ciudad" placeholder="Ciudad del evento" required />
+      </div>
+    </div>
+    <div class="form-field">
+      <label>Mensaje (opcional)</label>
+      <textarea id="mensaje" placeholder="Cuéntanos más sobre tu evento..."></textarea>
+    </div>
+    <button type="submit" class="btn-submit">Enviar Cotización por WhatsApp</button>
+  </form>
+  <p class="whatsapp-alt">¿Prefieres chatear directo? <a href="https://wa.me/TUNUMERO" target="_blank">Escríbenos al WhatsApp</a></p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="nav-logo">SONORA <span>MOMENTS</span></div>
+    <p>Música en vivo para los momentos que no se olvidan. Elegancia, emoción y profesionalismo en cada nota.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Servicios</h4>
+    <ul>
+      <li><a href="#servicios">Matrimonios</a></li>
+      <li><a href="#servicios">Misas y Ceremonias</a></li>
+      <li><a href="#servicios">Bautizos</a></li>
+      <li><a href="#servicios">Serenatas</a></li>
+      <li><a href="#servicios">Flashmobs</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Contacto</h4>
+    <ul>
+      <li><a href="https://wa.me/TUNUMERO" target="_blank">WhatsApp</a></li>
+      <li><a href="mailto:contacto@sonoramoments.com">Email</a></li>
+      <li><a href="#">Instagram</a></li>
+      <li><a href="#">Facebook</a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    © 2026 Sonora Moments · Música en Vivo · Todos los derechos reservados
+  </div>
+</footer>
+
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/TUNUMERO?text=Hola,%20me%20interesa%20contratar%20música%20en%20vivo" class="wa-float" target="_blank" title="Chatear por WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.556 4.111 1.528 5.838L0 24l6.335-1.512A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.848 0-3.584-.493-5.083-1.355l-.361-.214-3.762.897.952-3.668-.235-.376A9.945 9.945 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+</a>
+
+<script>
+  // Navbar scroll
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // WhatsApp form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const nombre = document.getElementById('nombre').value;
+    const telefono = document.getElementById('telefono').value;
+    const evento = document.getElementById('evento').value;
+    const fecha = document.getElementById('fecha').value;
+    const ciudad = document.getElementById('ciudad').value;
+    const mensaje = document.getElementById('mensaje').value;
+    const text = `Hola Sonora Moments! 🎵\n\nNombre: ${nombre}\nTeléfono: ${telefono}\nEvento: ${evento}\nFecha: ${fecha}\nCiudad: ${ciudad}${mensaje ? '\nMensaje: ' + mensaje : ''}\n\n¡Quiero cotizar mi evento!`;
+    window.open(`https://wa.me/TUNUMERO?text=${encodeURIComponent(text)}`, '_blank');
+  }
+</script>
+</body>
+</html>

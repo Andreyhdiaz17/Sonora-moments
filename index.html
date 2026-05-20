@@ -99,13 +99,27 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(105deg, rgba(10,12,16,.82) 40%, rgba(10,12,16,.3) 100%),
-        url('https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=1600&q=80') center/cover no-repeat;
-      transform: scale(1.06);
-      animation: slowZoom 18s ease-out forwards;
+      overflow: hidden;
     }
-    @keyframes slowZoom { to { transform: scale(1); } }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.6s ease-in-out;
+    }
+    .slide.active { opacity: 1; }
+    .slide::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, rgba(10,12,16,.85) 35%, rgba(10,12,16,.35) 100%);
+    }
+    .slide-1 { background-image: url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1600&q=85'); }
+    .slide-2 { background-image: url('https://images.unsplash.com/photo-1540039155733-5bb30b4b36f0?w=1600&q=85'); }
+    .slide-3 { background-image: url('https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=1600&q=85'); }
 
     .hero-lights {
       position: absolute;
@@ -278,11 +292,17 @@
     .servicio-card:hover { border-color: var(--gold); transform: translateY(-4px); }
 
     .servicio-icon {
-      font-size: 2rem;
-      margin-bottom: 16px;
-      display: block;
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(201,168,76,.35);
+      border-radius: 50%;
       color: var(--gold-light);
     }
+    .servicio-icon svg { width: 26px; height: 26px; }
     .servicio-card h3 {
       font-size: .75rem;
       font-weight: 700;
@@ -533,12 +553,12 @@
     <span>MOMENTS</span>
   </div>
   <ul class="nav-links" id="navLinks">
-    <li><a href="#hero">Inicio</a></li>
-    <li><a href="#servicios">Servicios</a></li>
-    <li><a href="#musicos">Músicos</a></li>
-    <li><a href="#nosotros">Nosotros</a></li>
-    <li><a href="#contacto">Contacto</a></li>
-    <li><a href="https://wa.me/TUNUMERO?text=Hola,%20quiero%20reservar%20música%20en%20vivo" class="btn-reservar-nav">Reservar Ahora</a></li>
+    <li><a href="javascript:void(0)" onclick="goTo('hero')">Inicio</a></li>
+    <li><a href="javascript:void(0)" onclick="goTo('servicios')">Servicios</a></li>
+    <li><a href="javascript:void(0)" onclick="goTo('musicos')">Músicos</a></li>
+    <li><a href="javascript:void(0)" onclick="goTo('nosotros')">Nosotros</a></li>
+    <li><a href="javascript:void(0)" onclick="goTo('contacto')">Contacto</a></li>
+    <li><a href="https://wa.me/573208684956?text=Hola,%20quiero%20reservar%20música%20en%20vivo" class="btn-reservar-nav" target="_blank">Reservar Ahora</a></li>
   </ul>
   <div class="hamburger" id="hamburger">
     <span></span><span></span><span></span>
@@ -547,7 +567,11 @@
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-bg"></div>
+  <div class="hero-bg">
+    <div class="slide slide-1 active"></div>
+    <div class="slide slide-2"></div>
+    <div class="slide slide-3"></div>
+  </div>
   <div class="hero-lights"></div>
   <div class="hero-content">
     <p class="hero-eyebrow">✦ Música en Vivo</p>
@@ -561,7 +585,7 @@
       se convierta en un recuerdo para toda la vida.
     </p>
     <div class="hero-btns">
-      <a href="https://wa.me/TUNUMERO?text=Hola,%20quiero%20reservar%20música%20en%20vivo%20para%20mi%20evento" class="btn-primary" target="_blank">
+      <a href="https://wa.me/573208684956?text=Hola,%20quiero%20reservar%20música%20en%20vivo%20para%20mi%20evento" class="btn-primary" target="_blank">
         <!-- WhatsApp icon -->
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.556 4.111 1.528 5.838L0 24l6.335-1.512A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.848 0-3.584-.493-5.083-1.355l-.361-.214-3.762.897.952-3.668-.235-.376A9.945 9.945 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
         Reservar por WhatsApp
@@ -582,34 +606,46 @@
   <div class="divider reveal"></div>
   <div class="servicios-grid">
     <div class="servicio-card reveal">
-      <span class="servicio-icon">💍</span>
+      <span class="servicio-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 3c-1.5 0-3 .8-3 2.5S10.5 8 12 8s3-.8 3-2.5S13.5 3 12 3z"/><path d="M7 8c0 2.8 2.2 5 5 5s5-2.2 5-5"/><path d="M5 21c0-4 3.1-7 7-7s7 3 7 7"/><circle cx="8" cy="5.5" r="1"/><circle cx="16" cy="5.5" r="1"/></svg>
+      </span>
       <h3>Matrimonios</h3>
-      <p>Música elegante para el día más importante de tu vida.</p>
+      <p>Música elegante para el día más importante de tu vida. Desde la entrada hasta el último baile.</p>
     </div>
     <div class="servicio-card reveal">
-      <span class="servicio-icon">⛪</span>
+      <span class="servicio-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </span>
       <h3>Misas y Ceremonias</h3>
-      <p>Acompañamiento musical para ceremonias religiosas.</p>
+      <p>Acompañamiento musical sagrado y emotivo para ceremonias religiosas y civiles.</p>
     </div>
     <div class="servicio-card reveal">
-      <span class="servicio-icon">👶</span>
+      <span class="servicio-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="8" r="4"/><path d="M6 20v-1a6 6 0 0112 0v1"/><path d="M3 10c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2z"/><path d="M19 10c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2z"/></svg>
+      </span>
       <h3>Bautizos</h3>
-      <p>Un ambiente tierno y especial para este momento único.</p>
+      <p>Un ambiente tierno y especial para celebrar este momento único en familia.</p>
     </div>
     <div class="servicio-card reveal">
-      <span class="servicio-icon">🎵</span>
+      <span class="servicio-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      </span>
       <h3>Serenatas</h3>
-      <p>Sorprende a esa persona especial con una serenata inolvidable.</p>
+      <p>Sorprende a esa persona especial con una serenata romántica e inolvidable.</p>
     </div>
     <div class="servicio-card reveal">
-      <span class="servicio-icon">✨</span>
+      <span class="servicio-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </span>
       <h3>Flashmobs</h3>
-      <p>Experiencias sorpresa que crean recuerdos para siempre.</p>
+      <p>Experiencias sorpresa que impactan y crean recuerdos únicos para siempre.</p>
     </div>
     <div class="servicio-card reveal">
-      <span class="servicio-icon">🥂</span>
+      <span class="servicio-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+      </span>
       <h3>Eventos Corporativos</h3>
-      <p>Amenización musical de alto nivel para tus eventos de empresa.</p>
+      <p>Amenización musical de alto nivel para lanzamientos, galas y eventos de empresa.</p>
     </div>
   </div>
 </section>
@@ -621,7 +657,7 @@
   <div class="divider reveal"></div>
   <div class="musicos-grid">
     <div class="musico-card reveal">
-      <img class="musico-img" src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&q=70" alt="Cuarteto de Cuerdas" loading="lazy" />
+      <img class="musico-img" src="https://images.unsplash.com/photo-1465821185615-20b3c2fbf41b?auto=format&fit=crop&w=600&q=80" alt="Cuarteto de Cuerdas" />
       <div class="musico-info">
         <h3>Cuarteto Sonora</h3>
         <span class="musico-badge">Cuerdas & Clásica</span>
@@ -629,7 +665,7 @@
       </div>
     </div>
     <div class="musico-card reveal">
-      <img class="musico-img" src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=70" alt="Voz & Piano" loading="lazy" />
+      <img class="musico-img" src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=600&q=80" alt="Voz & Piano" />
       <div class="musico-info">
         <h3>Dúo Voz & Piano</h3>
         <span class="musico-badge">Pop & Soul</span>
@@ -637,7 +673,7 @@
       </div>
     </div>
     <div class="musico-card reveal">
-      <img class="musico-img" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&q=70" alt="Mariachi & Folclor" loading="lazy" />
+      <img class="musico-img" src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=600&q=80" alt="Ensamble Folklórico" />
       <div class="musico-info">
         <h3>Ensamble Folklórico</h3>
         <span class="musico-badge">Folclor & Mariachi</span>
@@ -726,7 +762,7 @@
     </div>
     <button type="submit" class="btn-submit">Enviar Cotización por WhatsApp</button>
   </form>
-  <p class="whatsapp-alt">¿Prefieres chatear directo? <a href="https://wa.me/TUNUMERO" target="_blank">Escríbenos al WhatsApp</a></p>
+  <p class="whatsapp-alt">¿Prefieres chatear directo? <a href="https://wa.me/573208684956" target="_blank">Escríbenos al WhatsApp</a></p>
 </section>
 
 <!-- FOOTER -->
@@ -748,7 +784,7 @@
   <div class="footer-col">
     <h4>Contacto</h4>
     <ul>
-      <li><a href="https://wa.me/TUNUMERO" target="_blank">WhatsApp</a></li>
+      <li><a href="https://wa.me/573208684956" target="_blank">WhatsApp</a></li>
       <li><a href="mailto:contacto@sonoramoments.com">Email</a></li>
       <li><a href="#">Instagram</a></li>
       <li><a href="#">Facebook</a></li>
@@ -760,11 +796,26 @@
 </footer>
 
 <!-- Floating WhatsApp -->
-<a href="https://wa.me/TUNUMERO?text=Hola,%20me%20interesa%20contratar%20música%20en%20vivo" class="wa-float" target="_blank" title="Chatear por WhatsApp">
+<a href="https://wa.me/573208684956?text=Hola,%20me%20interesa%20contratar%20música%20en%20vivo" class="wa-float" target="_blank" title="Chatear por WhatsApp">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.556 4.111 1.528 5.838L0 24l6.335-1.512A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.848 0-3.584-.493-5.083-1.355l-.361-.214-3.762.897.952-3.668-.235-.376A9.945 9.945 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
 </a>
 
 <script>
+  // Smooth scroll function
+  function goTo(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('navLinks').classList.remove('open');
+  }
+
+  // Hero slideshow
+  const slides = document.querySelectorAll('.slide');
+  let current = 0;
+  setInterval(() => {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+  }, 4000);
+
   // Navbar scroll
   const nav = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
@@ -794,7 +845,7 @@
     const ciudad = document.getElementById('ciudad').value;
     const mensaje = document.getElementById('mensaje').value;
     const text = `Hola Sonora Moments! 🎵\n\nNombre: ${nombre}\nTeléfono: ${telefono}\nEvento: ${evento}\nFecha: ${fecha}\nCiudad: ${ciudad}${mensaje ? '\nMensaje: ' + mensaje : ''}\n\n¡Quiero cotizar mi evento!`;
-    window.open(`https://wa.me/TUNUMERO?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`https://wa.me/573208684956?text=${encodeURIComponent(text)}`, '_blank');
   }
 </script>
 </body>

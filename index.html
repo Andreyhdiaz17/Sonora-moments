@@ -10,8 +10,8 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --gold: #C9A84C;
-      --gold-light: #E8C96A;
+      --gold: #DCBA6A;
+      --gold-light: #EAD08A;
       --dark: #0A0C10;
       --dark-2: #111520;
       --dark-3: #1A1F2E;
@@ -119,12 +119,12 @@
     }
     .slide-1 { background-image: url('img/Portada.jpeg'); }
     .slide-2 { background-image: url('img/Serenatas1.jpeg'); }
-    .slide-3 { background-image: url('img/Sinfonico2.jpeg'); }
+    .slide-3 { background-image: url('img/Serenata.jpeg'); }
 
     .hero-lights {
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 60% 50% at 70% 40%, rgba(201,168,76,.12) 0%, transparent 70%);
+      background: radial-gradient(ellipse 60% 50% at 70% 40%, rgba(212,176,90,.12) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -288,11 +288,11 @@
       align-items: center;
       overflow: hidden;
       border-radius: 4px;
-      border: 1px solid rgba(201,168,76,.1);
+      border: 1px solid rgba(212,176,90,.1);
       cursor: default;
       transition: border-color .3s;
     }
-    .servicio-card:hover { border-color: rgba(201,168,76,.4); }
+    .servicio-card:hover { border-color: rgba(212,176,90,.4); }
 
     .servicio-bg {
       position: absolute;
@@ -326,7 +326,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid rgba(201,168,76,.4);
+      border: 1px solid rgba(212,176,90,.4);
       border-radius: 50%;
       color: var(--gold-light);
     }
@@ -396,7 +396,7 @@
       margin: 20px 20px 20px 0;
       border-radius: 6px;
       overflow: hidden;
-      border: 1px solid rgba(201,168,76,.2);
+      border: 1px solid rgba(212,176,90,.2);
     }
     .servicio-vvideo iframe { width: 100%; height: 100%; display: block; }
     .servicio-card.with-vvideo { min-height: 360px; }
@@ -413,16 +413,16 @@
 
     /* Unified block: info card + horizontal video */
     .servicio-block-wrap {
-      border: 1px solid rgba(201,168,76,.1);
+      border: 1px solid rgba(212,176,90,.1);
       border-radius: 4px;
       overflow: hidden;
       transition: border-color .3s;
     }
-    .servicio-block-wrap:hover { border-color: rgba(201,168,76,.4); }
+    .servicio-block-wrap:hover { border-color: rgba(212,176,90,.4); }
     .servicio-block-wrap .servicio-card {
       border: none;
       border-radius: 0;
-      border-bottom: 1px solid rgba(201,168,76,.12);
+      border-bottom: 1px solid rgba(212,176,90,.12);
     }
     .servicio-hvideo {
       aspect-ratio: 16/6;
@@ -443,7 +443,7 @@
       aspect-ratio: 9/16;
       border-radius: 6px;
       overflow: hidden;
-      border: 1px solid rgba(201,168,76,.15);
+      border: 1px solid rgba(212,176,90,.15);
       background: var(--dark-3);
     }
     .miranos-item iframe { width: 100%; height: 100%; display: block; }
@@ -474,7 +474,7 @@
 
     .musico-card {
       background: var(--dark-3);
-      border: 1px solid rgba(201,168,76,.12);
+      border: 1px solid rgba(212,176,90,.12);
       border-radius: 4px;
       overflow: hidden;
       transition: transform .25s, border-color .25s;
@@ -491,20 +491,16 @@
     }
     .musico-card:hover .musico-img { filter: brightness(.95) sepia(.08); }
 
-    .musico-info { padding: 22px 20px; }
-    .musico-info h3 { font-size: .95rem; font-weight: 600; letter-spacing: .08em; margin-bottom: 6px; }
-    .musico-badge {
-      display: inline-block;
+    .musico-info { padding: 18px 20px 22px; text-align: center; }
+    .musico-info h3 { font-size: 1rem; font-weight: 700; color: #fff; margin-top: 6px; letter-spacing: .02em; }
+    .musico-role {
+      display: block;
       font-size: .62rem;
-      letter-spacing: .16em;
+      letter-spacing: .18em;
       text-transform: uppercase;
       color: var(--gold);
-      border: 1px solid rgba(201,168,76,.4);
-      padding: 3px 10px;
-      border-radius: 2px;
-      margin-bottom: 10px;
     }
-    .musico-info p { font-size: .78rem; color: var(--text-muted); line-height: 1.6; }
+    .musico-desc { font-size: .76rem; color: var(--text-muted); line-height: 1.6; margin-top: 8px; font-weight: 300; }
 
     .musicos-cta { text-align: center; }
 
@@ -533,7 +529,7 @@
       right: -20px;
       width: 60%;
       aspect-ratio: 1;
-      border: 1px solid rgba(201,168,76,.3);
+      border: 1px solid rgba(212,176,90,.3);
       border-radius: 4px;
       z-index: -1;
     }
@@ -555,7 +551,7 @@
       gap: 40px;
       margin-top: 36px;
       padding-top: 36px;
-      border-top: 1px solid rgba(201,168,76,.2);
+      border-top: 1px solid rgba(212,176,90,.2);
     }
     .stat-num {
       font-family: 'Cormorant Garamond', serif;
@@ -581,7 +577,7 @@
     .form-field select,
     .form-field textarea {
       background: var(--dark-3);
-      border: 1px solid rgba(201,168,76,.2);
+      border: 1px solid rgba(212,176,90,.2);
       color: var(--text);
       font-family: 'Montserrat', sans-serif;
       font-size: .84rem;
@@ -631,7 +627,7 @@
     /* ── FOOTER ── */
     footer {
       background: var(--dark-2);
-      border-top: 1px solid rgba(201,168,76,.15);
+      border-top: 1px solid rgba(212,176,90,.15);
       padding: 48px 48px 32px;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
@@ -648,7 +644,7 @@
 
     .footer-bottom {
       grid-column: 1/-1;
-      border-top: 1px solid rgba(201,168,76,.1);
+      border-top: 1px solid rgba(212,176,90,.1);
       padding-top: 24px;
       text-align: center;
       font-size: .7rem;
@@ -755,20 +751,22 @@
   <div class="divider reveal"></div>
   <div class="servicios-grid">
 
-    <!-- MISAS + video vertical derecha -->
-    <div class="servicio-card with-vvideo reveal">
-      <div class="servicio-bg" style="background-image:url('img/Misas.jpeg')"></div>
-      <div class="servicio-overlay"></div>
-      <div class="servicio-content">
-        <span class="servicio-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span>
-        <div class="servicio-text">
-          <h3>Misas y Ceremonias</h3>
-          <p class="servicio-desc">Acompañamiento musical sagrado y emotivo para cada rito religioso y civil, creando momentos llenos de fe y emoción.</p>
-          <ul class="servicio-sub"><li>Bautizos</li><li>Matrimonios</li><li>Bodas civiles</li><li>Exequias</li></ul>
+    <!-- MISAS + video horizontal abajo -->
+    <div class="servicio-block-wrap reveal">
+      <div class="servicio-card">
+        <div class="servicio-bg" style="background-image:url('img/Misas.jpeg')"></div>
+        <div class="servicio-overlay"></div>
+        <div class="servicio-content">
+          <span class="servicio-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span>
+          <div class="servicio-text">
+            <h3>Misas y Ceremonias</h3>
+            <p class="servicio-desc">Acompañamiento musical sagrado y emotivo para cada rito religioso y civil, creando momentos llenos de fe y emoción.</p>
+            <ul class="servicio-sub"><li>Bautizos</li><li>Matrimonios</li><li>Bodas civiles</li><li>Exequias</li></ul>
+          </div>
         </div>
-        <div class="servicio-vvideo">
-          <iframe src="https://player.vimeo.com/video/1195785275?badge=0&autopause=0" frameborder="0" allow="autoplay; fullscreen"></iframe>
-        </div>
+      </div>
+      <div class="servicio-hvideo">
+        <iframe src="https://player.vimeo.com/video/1195784707?title=0&byline=0&portrait=0&badge=0&autopause=0" frameborder="0" allow="autoplay; fullscreen"></iframe>
       </div>
     </div>
 
@@ -784,28 +782,26 @@
           <ul class="servicio-sub"><li>Cantantes líricos</li><li>Instrumentistas sinfónicos</li><li>Música popular</li></ul>
         </div>
         <div class="servicio-vvideo">
-          <iframe src="https://player.vimeo.com/video/1195446851?badge=0&autopause=0" frameborder="0" allow="autoplay; fullscreen"></iframe>
+          <iframe src="https://player.vimeo.com/video/1195446851?title=0&byline=0&portrait=0&badge=0&autopause=0" frameborder="0" allow="autoplay; fullscreen"></iframe>
         </div>
       </div>
     </div>
 
-    <!-- SERENATAS + video horizontal integrado -->
-    <div class="servicio-block-wrap reveal">
-      <div class="servicio-card">
-        <div class="servicio-bg" style="background-image:url('img/Serenata.jpeg')"></div>
-        <div class="servicio-overlay"></div>
-        <div class="servicio-content">
-          <span class="servicio-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
-          <div class="servicio-text">
-            <h3>Serenatas</h3>
-            <p class="servicio-desc">El regalo más emotivo y elegante. Nuestro Cuarteto Lírico Sonora lleva música en vivo a donde el corazón lo pida, con una interpretación que nunca se olvida.</p>
-            <span class="servicio-sub-label">✦ Cuarteto Lírico Sonora</span>
-            <ul class="servicio-sub"><li>Tenor</li><li>Soprano</li><li>Piano</li><li>Violín</li></ul>
-          </div>
+    <!-- SERENATAS + video vertical derecha -->
+    <div class="servicio-card with-vvideo reveal">
+      <div class="servicio-bg" style="background-image:url('img/Serenata.jpeg')"></div>
+      <div class="servicio-overlay"></div>
+      <div class="servicio-content">
+        <span class="servicio-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
+        <div class="servicio-text">
+          <h3>Serenatas</h3>
+          <p class="servicio-desc">El regalo más emotivo y elegante. Nuestro Cuarteto Lírico Sonora lleva música en vivo a donde el corazón lo pida.</p>
+          <span class="servicio-sub-label">✦ Cuarteto Lírico Sonora</span>
+          <ul class="servicio-sub"><li>Tenor</li><li>Soprano</li><li>Piano</li><li>Violín</li></ul>
         </div>
-      </div>
-      <div class="servicio-hvideo">
-        <iframe src="https://player.vimeo.com/video/1195784707?badge=0&autopause=0" frameborder="0" allow="autoplay; fullscreen"></iframe>
+        <div class="servicio-vvideo">
+          <iframe src="https://player.vimeo.com/video/1195785275?title=0&byline=0&portrait=0&badge=0&autopause=0" frameborder="0" allow="autoplay; fullscreen"></iframe>
+        </div>
       </div>
     </div>
 
@@ -821,7 +817,7 @@
           <ul class="servicio-sub"><li>Cocteles y recepciones</li><li>Lanzamientos de producto</li><li>Galas y premiaciones</li><li>Celebraciones institucionales</li></ul>
         </div>
         <div class="servicio-vvideo">
-          <iframe src="https://player.vimeo.com/video/1195785003?badge=0&autopause=0" frameborder="0" allow="autoplay; fullscreen"></iframe>
+          <iframe src="https://player.vimeo.com/video/1195785003?title=0&byline=0&portrait=0&badge=0&autopause=0" frameborder="0" allow="autoplay; fullscreen"></iframe>
         </div>
       </div>
     </div>
@@ -841,7 +837,7 @@
         </div>
       </div>
       <div class="servicio-hvideo">
-        <iframe src="https://player.vimeo.com/video/1195785467?badge=0&autopause=0" frameborder="0" allow="autoplay; fullscreen"></iframe>
+        <iframe src="https://player.vimeo.com/video/1195785467?title=0&byline=0&portrait=0&badge=0&autopause=0" frameborder="0" allow="autoplay; fullscreen"></iframe>
       </div>
     </div>
 
@@ -855,27 +851,35 @@
   <div class="divider reveal"></div>
   <div class="musicos-grid">
     <div class="musico-card reveal">
-      <img class="musico-img" src="img/Sinfonico2.jpeg" alt="Sinfónico Sonora" style="object-position: top center;" />
+      <img class="musico-img" src="img/Cantante_Lírico.jpeg" alt="Soprano Paula Merchán" />
       <div class="musico-info">
-        <h3>Sinfónico Sonora</h3>
-        <span class="musico-badge">Instrumentos Sinfónicos</span>
-        <p>Instrumentos sinfónicos con elegancia y emoción. Con <strong>Luis José Miguel Jiménez</strong> (percusión) y <strong>Luis Fabián Andrés Jiménez</strong> (violín).</p>
+        <span class="musico-role">Cantante Lírico Sonora</span>
+        <h3><strong>Soprano Paula Merchán</strong></h3>
+        <p class="musico-desc">Voz lírica de alto nivel con repertorio versátil en ópera, zarzuela y música popular.</p>
       </div>
     </div>
     <div class="musico-card reveal">
-      <img class="musico-img" src="img/Cantante_Lírico.jpeg" alt="Cantante Lírico Sonora" />
+      <img class="musico-img" src="img/Sinfonico2.jpeg" alt="Luis José Miguel Jiménez" style="object-position: top center;" />
       <div class="musico-info">
-        <h3>Cantante Lírico Sonora</h3>
-        <span class="musico-badge">Lírica & Ópera</span>
-        <p>Tenores, sopranos, barítonos, contraltos, dúos y ensambles con repertorio versátil. Con la <strong>Soprano Paula Merchán</strong>.</p>
+        <span class="musico-role">Sinfónico Sonora</span>
+        <h3><strong>Luis José Miguel Jiménez</strong></h3>
+        <p class="musico-desc">Percusionista sinfónico con elegancia y precisión en cada interpretación musical.</p>
       </div>
     </div>
     <div class="musico-card reveal">
-      <img class="musico-img" src="img/Tenor.jpeg" alt="Primer Tenor Colombiano" />
+      <img class="musico-img" src="img/Violin.jpeg" alt="Luis Fabián Andrés Jiménez" style="object-position: top center;" />
       <div class="musico-info">
-        <h3>Tenor</h3>
-        <span class="musico-badge">Tradición & Alegría</span>
-        <p>Tangos, mariachis, tríos, música llanera y más. Tradición y alegría con el <strong>Primer Tenor Colombiano Danilo Jiménez</strong>.</p>
+        <span class="musico-role">Violinista Sinfónico</span>
+        <h3><strong>Luis Fabián Andrés Jiménez</strong></h3>
+        <p class="musico-desc">Violinista con técnica sinfónica y sensibilidad musical excepcional en cada actuación.</p>
+      </div>
+    </div>
+    <div class="musico-card reveal">
+      <img class="musico-img" src="img/Tenor.jpeg" alt="Danilo Jiménez" />
+      <div class="musico-info">
+        <span class="musico-role">Primer Tenor Colombiano</span>
+        <h3><strong>Danilo Jiménez</strong></h3>
+        <p class="musico-desc">Tangos, mariachis, tríos y música llanera. Tradición y alegría en cada presentación.</p>
       </div>
     </div>
   </div>
@@ -894,13 +898,13 @@
   <div class="miranos-grid reveal">
     <div>
       <div class="miranos-item">
-        <iframe src="https://player.vimeo.com/video/1195785670?badge=0&autopause=0" frameborder="0" allow="autoplay; fullscreen"></iframe>
+        <iframe src="https://player.vimeo.com/video/1195785670?title=0&byline=0&portrait=0&badge=0&autopause=0" frameborder="0" allow="autoplay; fullscreen"></iframe>
       </div>
       <p class="miranos-label">Sinfónico Sonora</p>
     </div>
     <div>
       <div class="miranos-item">
-        <iframe src="https://player.vimeo.com/video/1195786078?badge=0&autopause=0" frameborder="0" allow="autoplay; fullscreen"></iframe>
+        <iframe src="https://player.vimeo.com/video/1195786078?title=0&byline=0&portrait=0&badge=0&autopause=0" frameborder="0" allow="autoplay; fullscreen"></iframe>
       </div>
       <p class="miranos-label">Ensamble Tradicional</p>
     </div>
@@ -925,7 +929,7 @@
         <span class="stat-label">Eventos</span>
       </div>
       <div>
-        <span class="stat-num">+8</span>
+        <span class="stat-num">+10</span>
         <span class="stat-label">Años</span>
       </div>
       <div>

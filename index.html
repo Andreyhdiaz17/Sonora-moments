@@ -483,9 +483,20 @@
       margin-top: 8px;
     }
 
+    .servicio-vvideo-bottom {
+      display: flex;
+      justify-content: center;
+      padding: 20px 0 28px;
+      background: var(--dark-3);
+    }
+    .servicio-vvideo-bottom .servicio-vvideo {
+      margin: 0;
+      width: 342px;
+    }
+
     @media (max-width: 700px) {
-      .servicio-vvideo { width: 160px; }
       .miranos-grid { grid-template-columns: 1fr; max-width: 360px; }
+      .servicio-vvideo-bottom .servicio-vvideo { width: 90%; max-width: 340px; }
     }
 
     /* ── MÚSICOS ── */
@@ -797,52 +808,64 @@
       </div>
     </div>
 
-    <!-- FLASHMOBS + video vertical derecha -->
-    <div class="servicio-card with-vvideo reveal">
-      <div class="servicio-bg" style="background-image:url('img/Sinfonico1.jpeg')"></div>
-      <div class="servicio-overlay"></div>
-      <div class="servicio-content">
-        <span class="servicio-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
-        <div class="servicio-text">
-          <h3>Flashmobs</h3>
-          <p class="servicio-desc">Sorpresas musicales que impactan y emocionan. Combinamos lo lírico, lo sinfónico y lo popular para crear momentos únicos e irrepetibles.</p>
-          <ul class="servicio-sub"><li>Cantantes líricos</li><li>Instrumentistas sinfónicos</li><li>Música popular</li></ul>
+    <!-- FLASHMOBS + video vertical abajo -->
+    <div class="servicio-block-wrap reveal">
+      <div class="servicio-card">
+        <div class="servicio-bg" style="background-image:url('img/Sinfonico1.jpeg')"></div>
+        <div class="servicio-overlay"></div>
+        <div class="servicio-content">
+          <span class="servicio-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+          <div class="servicio-text">
+            <h3>Flashmobs</h3>
+            <p class="servicio-desc">Sorpresas musicales que impactan y emocionan. Combinamos lo lírico, lo sinfónico y lo popular para crear momentos únicos e irrepetibles.</p>
+            <ul class="servicio-sub"><li>Cantantes líricos</li><li>Instrumentistas sinfónicos</li><li>Música popular</li></ul>
+          </div>
         </div>
+      </div>
+      <div class="servicio-vvideo-bottom">
         <div class="servicio-vvideo">
           <div class="vvideo-inner"><iframe src="https://player.vimeo.com/video/1195446851?title=0&byline=0&portrait=0&badge=0&autopause=0" frameborder="0" allow="autoplay; fullscreen"></iframe></div>
         </div>
       </div>
     </div>
 
-    <!-- SERENATAS + video vertical derecha -->
-    <div class="servicio-card with-vvideo reveal">
-      <div class="servicio-bg" style="background-image:url('img/Serenata.jpeg')"></div>
-      <div class="servicio-overlay"></div>
-      <div class="servicio-content">
-        <span class="servicio-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
-        <div class="servicio-text">
-          <h3>Serenatas</h3>
-          <p class="servicio-desc">El regalo más emotivo y elegante. Nuestro Cuarteto Lírico Sonora lleva música en vivo a donde el corazón lo pida.</p>
-          <span class="servicio-sub-label">✦ Cuarteto Lírico Sonora</span>
-          <ul class="servicio-sub"><li>Tenor</li><li>Soprano</li><li>Piano</li><li>Violín</li></ul>
+    <!-- SERENATAS + video vertical abajo -->
+    <div class="servicio-block-wrap reveal">
+      <div class="servicio-card">
+        <div class="servicio-bg" style="background-image:url('img/Serenata.jpeg')"></div>
+        <div class="servicio-overlay"></div>
+        <div class="servicio-content">
+          <span class="servicio-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
+          <div class="servicio-text">
+            <h3>Serenatas</h3>
+            <p class="servicio-desc">El regalo más emotivo y elegante. Nuestro Cuarteto Lírico Sonora lleva música en vivo a donde el corazón lo pida.</p>
+            <span class="servicio-sub-label">✦ Cuarteto Lírico Sonora</span>
+            <ul class="servicio-sub"><li>Tenor</li><li>Soprano</li><li>Piano</li><li>Violín</li></ul>
+          </div>
         </div>
+      </div>
+      <div class="servicio-vvideo-bottom">
         <div class="servicio-vvideo">
           <div class="vvideo-inner"><iframe src="https://player.vimeo.com/video/1195785275?title=0&byline=0&portrait=0&badge=0&autopause=0" frameborder="0" allow="autoplay; fullscreen"></iframe></div>
         </div>
       </div>
     </div>
 
-    <!-- EVENTOS EMPRESARIALES + video vertical derecha -->
-    <div class="servicio-card with-vvideo reveal">
-      <div class="servicio-bg" style="background-image:url('img/Eventos_Corporativos.jpeg')"></div>
-      <div class="servicio-overlay"></div>
-      <div class="servicio-content">
-        <span class="servicio-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></span>
-        <div class="servicio-text">
-          <h3>Eventos Empresariales</h3>
-          <p class="servicio-desc">Llevamos la música en vivo a tus eventos corporativos con profesionalismo y elegancia. La banda sonora perfecta para cada momento empresarial.</p>
-          <ul class="servicio-sub"><li>Cocteles y recepciones</li><li>Lanzamientos de producto</li><li>Galas y premiaciones</li><li>Celebraciones institucionales</li></ul>
+    <!-- EVENTOS EMPRESARIALES + video vertical abajo -->
+    <div class="servicio-block-wrap reveal">
+      <div class="servicio-card">
+        <div class="servicio-bg" style="background-image:url('img/Eventos_Corporativos.jpeg')"></div>
+        <div class="servicio-overlay"></div>
+        <div class="servicio-content">
+          <span class="servicio-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></span>
+          <div class="servicio-text">
+            <h3>Eventos Empresariales</h3>
+            <p class="servicio-desc">Llevamos la música en vivo a tus eventos corporativos con profesionalismo y elegancia. La banda sonora perfecta para cada momento empresarial.</p>
+            <ul class="servicio-sub"><li>Cocteles y recepciones</li><li>Lanzamientos de producto</li><li>Galas y premiaciones</li><li>Celebraciones institucionales</li></ul>
+          </div>
         </div>
+      </div>
+      <div class="servicio-vvideo-bottom">
         <div class="servicio-vvideo">
           <div class="vvideo-inner"><iframe src="https://player.vimeo.com/video/1195785003?title=0&byline=0&portrait=0&badge=0&autopause=0" frameborder="0" allow="autoplay; fullscreen"></iframe></div>
         </div>
@@ -944,7 +967,7 @@
     <img class="nosotros-img" src="img/violin1.jpeg" alt="Nosotros" loading="lazy" />
     <div class="nosotros-accent"></div>
   </div>
-  <div class="nosotros-text">
+  <div class="nosotros-text"> 
     <p class="section-label">Quiénes Somos</p>
     <h2 class="section-title">Pasión por la Música, Amor por los Momentos</h2>
     <div class="divider"></div>

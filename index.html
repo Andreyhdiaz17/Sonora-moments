@@ -391,17 +391,44 @@
       position: relative;
       z-index: 2;
       flex-shrink: 0;
-      width: 210px;
+      width: 342px;
       aspect-ratio: 9/16;
-      margin: 20px 20px 20px 0;
-      border-radius: 6px;
-      overflow: hidden;
-      border: 1px solid rgba(212,176,90,.2);
+      margin: 24px 28px 24px 16px;
     }
-    .servicio-vvideo iframe { width: 100%; height: 100%; display: block; }
-    .servicio-card.with-vvideo { min-height: 360px; }
+
+    /* Corner bracket decoration */
+    .servicio-vvideo::before,
+    .servicio-vvideo::after {
+      content: '';
+      position: absolute;
+      width: 22px; height: 22px;
+      border-color: var(--gold-light);
+      border-style: solid;
+      z-index: 4;
+      pointer-events: none;
+      opacity: .8;
+    }
+    .servicio-vvideo::before { top: -5px; left: -5px; border-width: 2px 0 0 2px; border-radius: 3px 0 0 0; }
+    .servicio-vvideo::after  { bottom: -5px; right: -5px; border-width: 0 2px 2px 0; border-radius: 0 0 3px 0; }
+
+    .vvideo-inner {
+      width: 100%; height: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(212,176,90,.45);
+      box-shadow: 0 0 28px rgba(212,176,90,.18), 0 10px 36px rgba(0,0,0,.5);
+      animation: videoGlow 4s ease-in-out infinite;
+    }
+    .vvideo-inner iframe { width: 100%; height: 100%; display: block; }
+
+    @keyframes videoGlow {
+      0%,100% { box-shadow: 0 0 22px rgba(212,176,90,.15), 0 10px 36px rgba(0,0,0,.5); }
+      50%      { box-shadow: 0 0 40px rgba(212,176,90,.32), 0 10px 36px rgba(0,0,0,.5); }
+    }
+
+    .servicio-card.with-vvideo { min-height: 660px; }
     .servicio-card.with-vvideo .servicio-overlay {
-      background: linear-gradient(90deg, rgba(10,12,16,.96) 0%, rgba(10,12,16,.88) 55%, rgba(10,12,16,.45) 100%);
+      background: linear-gradient(90deg, rgba(10,12,16,.96) 0%, rgba(10,12,16,.88) 52%, rgba(10,12,16,.35) 100%);
     }
     .servicio-desc {
       font-size: .78rem;
@@ -457,7 +484,7 @@
     }
 
     @media (max-width: 700px) {
-      .servicio-vvideo { width: 140px; }
+      .servicio-vvideo { width: 160px; }
       .miranos-grid { grid-template-columns: 1fr; max-width: 360px; }
     }
 
@@ -782,7 +809,7 @@
           <ul class="servicio-sub"><li>Cantantes líricos</li><li>Instrumentistas sinfónicos</li><li>Música popular</li></ul>
         </div>
         <div class="servicio-vvideo">
-          <iframe src="https://player.vimeo.com/video/1195446851?title=0&byline=0&portrait=0&badge=0&autopause=0" frameborder="0" allow="autoplay; fullscreen"></iframe>
+          <div class="vvideo-inner"><iframe src="https://player.vimeo.com/video/1195446851?title=0&byline=0&portrait=0&badge=0&autopause=0" frameborder="0" allow="autoplay; fullscreen"></iframe></div>
         </div>
       </div>
     </div>
@@ -800,7 +827,7 @@
           <ul class="servicio-sub"><li>Tenor</li><li>Soprano</li><li>Piano</li><li>Violín</li></ul>
         </div>
         <div class="servicio-vvideo">
-          <iframe src="https://player.vimeo.com/video/1195785275?title=0&byline=0&portrait=0&badge=0&autopause=0" frameborder="0" allow="autoplay; fullscreen"></iframe>
+          <div class="vvideo-inner"><iframe src="https://player.vimeo.com/video/1195785275?title=0&byline=0&portrait=0&badge=0&autopause=0" frameborder="0" allow="autoplay; fullscreen"></iframe></div>
         </div>
       </div>
     </div>
@@ -817,7 +844,7 @@
           <ul class="servicio-sub"><li>Cocteles y recepciones</li><li>Lanzamientos de producto</li><li>Galas y premiaciones</li><li>Celebraciones institucionales</li></ul>
         </div>
         <div class="servicio-vvideo">
-          <iframe src="https://player.vimeo.com/video/1195785003?title=0&byline=0&portrait=0&badge=0&autopause=0" frameborder="0" allow="autoplay; fullscreen"></iframe>
+          <div class="vvideo-inner"><iframe src="https://player.vimeo.com/video/1195785003?title=0&byline=0&portrait=0&badge=0&autopause=0" frameborder="0" allow="autoplay; fullscreen"></iframe></div>
         </div>
       </div>
     </div>
@@ -859,11 +886,11 @@
       </div>
     </div>
     <div class="musico-card reveal">
-      <img class="musico-img" src="img/Tenor.jpeg" alt="Danilo Jiménez" />
+      <img class="musico-img" src="img/Sinfonico2.jpeg" alt="Luis José Miguel Jiménez" style="object-position: top center;" />
       <div class="musico-info">
-        <span class="musico-role">Primer Tenor Colombiano</span>
-        <h3><strong>Danilo Jiménez</strong></h3>
-        <p class="musico-desc">Tangos, mariachis, tríos y música llanera. Tradición y alegría en cada presentación.</p>
+        <span class="musico-role">Sinfónico Sonora</span>
+        <h3><strong>Luis José Miguel Jiménez</strong></h3>
+        <p class="musico-desc">Percusionista sinfónico con elegancia y precisión en cada interpretación musical.</p>
       </div>
     </div>
     <div class="musico-card reveal">
@@ -875,11 +902,11 @@
       </div>
     </div>
     <div class="musico-card reveal">
-      <img class="musico-img" src="img/Sinfonico2.jpeg" alt="Luis José Miguel Jiménez" style="object-position: top center;" />
+      <img class="musico-img" src="img/Tenor.jpeg" alt="Danilo Jiménez" />
       <div class="musico-info">
-        <span class="musico-role">Sinfónico Sonora</span>
-        <h3><strong>Luis José Miguel Jiménez</strong></h3>
-        <p class="musico-desc">Percusionista sinfónico con elegancia y precisión en cada interpretación musical.</p>
+        <span class="musico-role">Primer Tenor Colombiano</span>
+        <h3><strong>Danilo Jiménez</strong></h3>
+        <p class="musico-desc">Tangos, mariachis, tríos y música llanera. Tradición y alegría en cada presentación.</p>
       </div>
     </div>
   </div>
